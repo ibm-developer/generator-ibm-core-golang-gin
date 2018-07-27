@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Generates a server using the gin framework",
   "license": "Apache-2.0",
-  "homepage": "https://github.com/ibm-developer/generator-core-ibm-golang-gin",
+  "homepage": "https://github.com/ibm-developer/generator-ibm-core-golang-gin",
   "files": [
     "generators",
     "lib"
@@ -38,5 +38,5 @@
     "mocha": "nyc --reporter=lcov mocha test/common/* --reporter mocha-multi-reporters --reporter-options configFile=config.json",
     "version": "standard-version"
   },
-  "repository": "https://github.com/ibm-developer/generator-core-ibm-golang-gin"
+  "repository": "https://github.com/ibm-developer/generator-ibm-core-golang-gin"
 }
