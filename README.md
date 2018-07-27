@@ -1,1 +1,1 @@
-# generator-core-ibm-golang-gin
+# generator-ibm-core-golang-gin
