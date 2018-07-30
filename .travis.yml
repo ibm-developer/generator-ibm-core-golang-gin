@@ -20,6 +20,6 @@ before_script:
 script: npm test && bash ./bmd-devops-pipeline/scripts/npm_version_upgrade.sh
 branches:
   only:
-  - development
+  - develop
   - master
   
