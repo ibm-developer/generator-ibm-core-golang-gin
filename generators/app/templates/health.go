@@ -1,11 +1,11 @@
 package routers
 
 import (
-  "github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin"
 )
 
 func HealthGET(c *gin.Context) {
-  c.JSON(200, gin.H{
-    "status": "UP",
-  })
+	c.JSON(200, gin.H{
+		"status": "UP",
+	})
 }

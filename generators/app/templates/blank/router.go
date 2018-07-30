@@ -1,7 +1,7 @@
 package routers
 
 import (
-  "github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin"
 )
 
 <% if (typeof routes !== 'undefined') {               -%>
@@ -13,7 +13,7 @@ import (
 <%     let funcName = path.replace(/\/:?([a-zA-Z])/g, function (g) { return g[g.length-1].toUpperCase(); }); -%>
 <%     funcName = funcName + route.method.toUpperCase();   -%>
 func <%- funcName %>(c *gin.Context){
-  c.JSON(200, gin.H{})
+	c.JSON(200, gin.H{})
 }
 
 <%   });                                                -%>
