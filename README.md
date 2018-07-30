@@ -6,8 +6,8 @@
 [img-ibmcloud-powered]: https://img.shields.io/badge/IBM%20Cloud-powered-blue.svg
 [url-cloud]: http://bluemix.net
 
-[img-travis-master]: https://travis.ibm.com/arf/generator-core-golang-gin.svg?token=sXo91qAvkL12pygC7Sta&branch=master
-[url-travis-master]: https://travis.ibm.com/arf/generator-core-golang-gin/branches
+[img-travis-master]: https://travis-ci.org/ibm-developer/generator-ibm-core-golang
+[url-travis-master]: https://travis-ci.org/ibm-developer/generator-ibm-core-golang
 
 This generator produces a simple Gin-based Golang server application, with all the ingredients you need for a good start at building a cloud native application. It can be run locally or remotely (e.g. IBM Cloud).
 
@@ -18,13 +18,13 @@ This generator produces a simple Gin-based Golang server application, with all t
 ```bash
 npm install -g yo
 ```
-- If you don't have it already, download [Go](https://golang.org/dl/) 
+- If you don't have it already, download [Go](https://golang.org/dl/)
 - Set up a [GOPATH](https://github.com/golang/go/wiki/SettingGOPATH)
 
 ## Installation
 
 ```bash
-npm install -g generator-core-golang-gin
+npm install -g generator-ibm-core-golang-gin
 ```
 
 ## Usage
@@ -60,15 +60,15 @@ routers/* | Folder containing router configuartion files
 Clone this repository and link it via npm
 
 ```
-git clone git@github.ibm.com:arf/generator-core-golang-gin.git
-cd generator-core-golang-gin
+git clone https://github.com/ibm-developer/generator-ibm-core-golang-gin.git
+cd generator-ibm-core-golang-gin
 npm link
 ```
 
 In a separate directory invoke the generator via
 
 ```
-yo core-golang-gin 
+yo ibm-core-golang-gin
 ```
 
 ## Testing

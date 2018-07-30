@@ -36,19 +36,11 @@ exports.webAppFile = {
   index_go: 'routers/index.go',
 };
 
-// exports.webFrameworkFile = {
-//   default_css: 'client/default.css',
-//   webpack_common_js: 'webpack.common.js',
-//   package_json: 'package.json'
-// };
-
 exports.microserviceFile = {
   swagger_ui: 'public/swagger-ui/',
   swagger_yml: 'public/swagger.yaml',
   swagger_go: 'routers/swagger.go',
 }
-
-// exports.blankNoYmlFile = {}
 
 exports.blankYmlFile = {
   swagger_ui: 'public/swagger-ui/',
