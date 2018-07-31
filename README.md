@@ -6,8 +6,8 @@
 [img-ibmcloud-powered]: https://img.shields.io/badge/IBM%20Cloud-powered-blue.svg
 [url-cloud]: http://bluemix.net
 
-[img-travis-master]: https://travis-ci.org/ibm-developer/generator-ibm-core-golang
-[url-travis-master]: https://travis-ci.org/ibm-developer/generator-ibm-core-golang
+[img-travis-master]: https://travis-ci.org/ibm-developer/generator-ibm-core-golang-gin
+[url-travis-master]: https://travis-ci.org/ibm-developer/generator-ibm-core-golang-gin
 
 This generator produces a simple Gin-based Golang server application, with all the ingredients you need for a good start at building a cloud native application. It can be run locally or remotely (e.g. IBM Cloud).
 
