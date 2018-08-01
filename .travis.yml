@@ -14,5 +14,4 @@ branches:
   only:
   - develop
   - master
-  - travis
   
