@@ -22,7 +22,9 @@ const helpers = require('yeoman-test');
 const myHelpers = require('../../lib/helpers.js');
 const PROJECT_NAME = 'ProjectName';
 
-describe('Go Generator integration test for default when application type not specified', () => {
+describe('Go Generator integration test for default when application type not specified', function() {
+  this.timeout(5000);
+  
   beforeEach(() => {
 
     // Mock the options, set up an output folder and run the generator

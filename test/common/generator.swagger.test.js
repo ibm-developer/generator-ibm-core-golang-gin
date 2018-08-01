@@ -22,7 +22,9 @@ const helpers = require('yeoman-test');
 const fs = require('fs');
 const PROJECT_NAME = 'ProjectName';
 
-describe('Go Generator integration test with openApiServices Json file', () => {
+describe('Go Generator integration test with openApiServices Json file', function () {
+  this.timeout(5000);
+  
   beforeEach(() => {
     let swagger = JSON.parse(
       fs.readFileSync(path.join(__dirname, '../resources/person_dino.json'), 'utf8')

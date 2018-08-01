@@ -24,6 +24,7 @@ const fs = require('fs');
 const bluemixOptions = fs.readFileSync(path.join(__dirname, '../../test/resources/bluemix.json'), 'utf8');
 
 describe('Generates a blank project using cmd line options with --bluemix', function () {
+  this.timeout(5000);
 
   before(function () {
     // Mock the options, set up an output folder and run the generator

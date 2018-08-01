@@ -40,7 +40,9 @@ function clean() {
   exec('rm -r ' + appPath);
 }
 
-describe('Generates a web app through prompts', () => {
+describe('Generates a web app through prompts', function() {
+  this.timeout(5000);
+  
   beforeEach(() => {
     // Mock the options, set up an output folder and run the generator
     return (
