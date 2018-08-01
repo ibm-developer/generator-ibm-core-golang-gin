@@ -13,6 +13,7 @@
     "yeoman-generator"
   ],
   "devDependencies": {
+    "coveralls": "^2.13.3",
     "eslint": "^4.19.1",
     "lint-staged": "^6.1.1",
     "nsp": "^2.8.0",
@@ -36,6 +37,7 @@
     "test": "npm run lint && npm run mocha",
     "lint": "eslint .",
     "mocha": "nyc --reporter=lcov mocha test/common/* --reporter mocha-multi-reporters --reporter-options configFile=config.json",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "version": "standard-version"
   },
   "repository": "https://github.com/ibm-developer/generator-ibm-core-golang-gin"
