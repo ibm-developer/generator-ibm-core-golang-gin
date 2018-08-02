@@ -168,6 +168,7 @@ module.exports = class extends Generator {
       this.options.name = props.appName;
       this.options.sanitizedName = helpers.sanitizeAppName(props.appName);
       this.options.applicationType = props.applicationType;
+
       if (props.useSwagger) {
         let file = fs.readFileSync(props.swaggerPath, 'utf8');
         this._parseSwagger(file);

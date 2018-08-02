@@ -7,8 +7,11 @@
 [img-ibmcloud-powered]: https://img.shields.io/badge/IBM%20Cloud-powered-blue.svg
 [url-cloud]: http://bluemix.net
 
-[img-travis-master]: https://travis-ci.org/ibm-developer/generator-ibm-core-golang
-[url-travis-master]: https://travis-ci.org/ibm-developer/generator-ibm-core-golang
+[img-travis-master]: https://travis-ci.org/ibm-developer/generator-ibm-core-golang-gin
+[url-travis-master]: https://travis-ci.org/ibm-developer/generator-ibm-core-golang-gin
+
+[img-coveralls-master]: https://coveralls.io/repos/github/ibm-developer/generator-ibm-core-golang-gin/badge.svg
+[url-coveralls-master]: https://coveralls.io/github/ibm-developer/generator-ibm-core-golang-gin
 
 [img-coveralls-master]: https://coveralls.io/repos/github/ibm-developer/generator-ibm-core-golang-gin/badge.svg
 [url-coveralls-master]: https://coveralls.io/github/ibm-developer/generator-ibm-core-golang-gin
