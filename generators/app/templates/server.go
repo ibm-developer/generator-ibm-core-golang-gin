@@ -1,10 +1,10 @@
 package main
 
 import (
-	"<%- appName %>/routers"
-	"<%- appName %>/plugins"
+	"<%- sanitizedName %>/routers"
+	"<%- sanitizedName %>/plugins"
 <% if (addServices) { -%>
-	"<%- appName %>/services"
+	"<%- sanitizedName %>/services"
 <% } -%>  
 	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/static"
@@ -103,7 +103,7 @@ func main() {
 	})
 	//Add Hystrix to prometheus metrics
 	collector := plugins.InitializePrometheusCollector(plugins.PrometheusCollectorConfig{
-		Namespace: "<%- appName %>",
+		Namespace: "<%- sanitizedName %>",
 	})
 	metricCollector.Registry.Register(collector.NewPrometheusCollector)
 
@@ -128,7 +128,8 @@ func main() {
 	defer reporter.Close()
 
 	sampler := jaeger.NewConstSampler(true)
-	tracer, closer := jaeger.NewTracer("<%- appName %>",
+	tracer, closer := jaeger.NewTracer("<%- sanitizedName
+	 %>",
 		sampler,
 		reporter,
 		jaeger.TracerOptions.Metrics(metrics),
@@ -188,7 +189,7 @@ func main() {
 	router.GET("/health", routers.HealthGET)
 <% } -%>
 	
-	log.Info("Starting <%- appName %> on port " + port())
+	log.Info("Starting <%- name %> on port " + port())
 
 	router.Run(port())
 }

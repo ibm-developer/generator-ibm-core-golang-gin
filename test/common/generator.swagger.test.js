@@ -20,7 +20,7 @@ const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 const fs = require('fs');
-const PROJECT_NAME = 'ProjectName';
+const PROJECT_NAME = 'Project Name';
 
 describe('Go Generator integration test with openApiServices Json file', function () {
   this.timeout(5000);
