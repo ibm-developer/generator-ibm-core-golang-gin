@@ -69,8 +69,13 @@ module.exports = class extends Generator {
     }
 
     if (!this.interactiveMode) {
-      let appName = this.options.bluemix.name || this.options.spec.appname;
-      this.options.appName = helpers.sanitizeAppName(appName);
+      // If bluemix contains app name, sanitize it
+      if (this.options.bluemix.name && !this.options.bluemix.sanitizedName) {
+        this.options.sanitizedName = helpers.sanitizeAppName(this.options.bluemix.name);
+      } else {
+        this.options.sanitizedName = this.options.bluemix.sanitizedName;
+      }
+      this.options.name = this.options.bluemix.name;
 
       if (this.options.spec && this.options.spec.applicationType) {
         this.options.applicationType = this.options.spec.applicationType;
@@ -160,8 +165,10 @@ module.exports = class extends Generator {
 
     return this.prompt(prompts).then(props => {
       // To access props, use props.promptName
-      this.options.appName = helpers.sanitizeAppName(props.appName);
+      this.options.name = props.appName;
+      this.options.sanitizedName = helpers.sanitizeAppName(props.appName);
       this.options.applicationType = props.applicationType;
+
       if (props.useSwagger) {
         let file = fs.readFileSync(props.swaggerPath, 'utf8');
         this._parseSwagger(file);
@@ -173,7 +180,7 @@ module.exports = class extends Generator {
   paths() {
     // Place the app in GOPATH/src/<appname>
     if (this.interactiveMode) {
-      this.destinationRoot(path.join(process.env.GOPATH, 'src/', this.options.appName));
+      this.destinationRoot(path.join(process.env.GOPATH, 'src/', this.options.sanitizedName));
     }
   }
 
@@ -286,7 +293,7 @@ module.exports = class extends Generator {
     if (this.interactiveMode) {
       this.log(
         'Your project has been generated at ' +
-          path.join(process.env.GOPATH, 'src/', this.options.appName)
+          path.join(process.env.GOPATH, 'src/', this.options.sanitizedName)
       );
     }
   }

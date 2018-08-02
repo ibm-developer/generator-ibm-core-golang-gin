@@ -2,7 +2,7 @@ swagger: '2.0'
 
 info:
   version: "0.0.1"
-  title: <%= appName %> API
+  title: <%= name %> API
 
 consumes:
   - text/plain
@@ -14,7 +14,7 @@ paths:
   /health:
     get:
       operationId: get
-      description: Get health status of <%= appName %>
+      description: Get health status of <%= name %>
       responses:
         200:
           description: "Health check response"

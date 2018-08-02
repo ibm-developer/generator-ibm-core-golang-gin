@@ -1,4 +1,4 @@
-# <%= appName %>
+# <%= name %>
 
 A generated IBM Cloud application
 

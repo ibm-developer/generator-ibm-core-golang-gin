@@ -19,7 +19,6 @@ const common = require('../lib/common.js');
 const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
-const myHelpers = require('../../lib/helpers.js');
 const fs = require('fs');
 const bluemixOptions = fs.readFileSync(path.join(__dirname, '../../test/resources/bluemix.json'), 'utf8');
 
@@ -56,7 +55,7 @@ describe('Generates a blank project using cmd line options with --bluemix', func
     it('contains default project name', () => {
       assert.fileContent(
         common.commonFile.README_md,
-        myHelpers.sanitizeAppName(JSON.parse(bluemixOptions).name)
+        JSON.parse(bluemixOptions).name
       );
     });
 
@@ -110,7 +109,7 @@ describe('Generates a web app using cmd line options with --bluemix', function (
     it('contains default project name', () => {
       assert.fileContent(
         common.commonFile.README_md,
-        myHelpers.sanitizeAppName(JSON.parse(bluemixOptions).name)
+        JSON.parse(bluemixOptions).name
       );
     });
 

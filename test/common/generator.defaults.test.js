@@ -19,8 +19,7 @@ const common = require('../lib/common.js');
 const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
-const myHelpers = require('../../lib/helpers.js');
-const PROJECT_NAME = 'ProjectName';
+const PROJECT_NAME = 'Project Name';
 
 describe('Go Generator integration test for default when application type not specified', function() {
   this.timeout(5000);
@@ -56,7 +55,7 @@ describe('Go Generator integration test for default when application type not sp
     it('contains default project name', () => {
       assert.fileContent(
         common.commonFile.README_md,
-        myHelpers.sanitizeAppName(PROJECT_NAME)
+        PROJECT_NAME
       );
     });
 
@@ -113,7 +112,7 @@ describe('Go Generator integration test for webapp', () => {
     it('contains default project name', () => {
       assert.fileContent(
         common.commonFile.README_md,
-        myHelpers.sanitizeAppName(PROJECT_NAME)
+        PROJECT_NAME
       );
     });
 

@@ -29,7 +29,7 @@
   "dependencies": {
     "ibm-openapi-support": "0.0.12",
     "log4js": "^2.8.0",
-    "npm": "^6.1.0",
+    "npm": "^6.3.0",
     "yeoman-generator": "^2.0.1"
   },
   "scripts": {
