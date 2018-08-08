@@ -16,7 +16,7 @@
 [img-coveralls-master]: https://coveralls.io/repos/github/ibm-developer/generator-ibm-core-golang-gin/badge.svg
 [url-coveralls-master]: https://coveralls.io/github/ibm-developer/generator-ibm-core-golang-gin
 
-This generator produces a simple Gin-based Golang server application, with all the ingredients you need for a good start at building a cloud native application. It can be run locally or remotely (e.g. IBM Cloud).
+This generator produces a simple Gin-based Golang server application, with all the ingredients you need for a good start at building a cloud native application. It can be run locally or remotely (e.g. IBM Cloud). 
 
 ## Pre-requisites
 
