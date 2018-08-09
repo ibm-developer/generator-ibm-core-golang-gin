@@ -1,0 +1,13 @@
+{
+    "check-coverage": true,
+    "statements": 82,
+    "branches": 70,
+    "functions": 87,
+    "lines": 83,
+    "include": [
+        "generators/app/*.js"
+    ],
+    "exclude": [
+        "generators/app/templates/**"
+    ]
+}
