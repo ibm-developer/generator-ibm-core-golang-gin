@@ -9,7 +9,7 @@ before_install:
 - export PATH=${PATH}:$PWD/hub-linux-386-2.2.9/bin/:$PWD/linux-amd64
 - export GOPATH="/tmp/go"
 - export PATH="/tmp/go/bin:${PATH}"
-script: npm test && npm run coveralls && ./npm_version_upgrade.sh
+script: npm test && npm run coveralls
 branches:
   only:
   - develop
