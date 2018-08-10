@@ -19,12 +19,6 @@
 
 [[projects]]
   branch = "master"
-  name = "github.com/codahale/hdrhistogram"
-  packages = ["."]
-  revision = "3a0bb77429bd3a61596f5e8a3172445844342120"
-
-[[projects]]
-  branch = "master"
   name = "github.com/gin-contrib/sse"
   packages = ["."]
   revision = "22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae"
@@ -64,16 +58,6 @@
   version = "v1.0.1"
 
 [[projects]]
-  name = "github.com/opentracing/opentracing-go"
-  packages = [
-    ".",
-    "ext",
-    "log"
-  ]
-  revision = "1949ddbfd147afd4d964a9f00b24eb291e0e7c38"
-  version = "v1.0.2"
-
-[[projects]]
   name = "github.com/prometheus/client_golang"
   packages = [
     "prometheus",
@@ -86,7 +70,7 @@
   branch = "master"
   name = "github.com/prometheus/client_model"
   packages = ["go"]
-  revision = "99fa1f4be8e564e8a6b613da7fa6f46c9edafc6c"
+  revision = "5c3871d89910bfb32f5fcab2aa4b9ec68e65a99f"
 
 [[projects]]
   branch = "master"
@@ -96,7 +80,7 @@
     "internal/bitbucket.org/ww/goautoneg",
     "model"
   ]
-  revision = "7600349dcfe1abd18d72d3a1770870d9800a7801"
+  revision = "c7de2306084e37d54b8be01f3541a8464345e9a5"
 
 [[projects]]
   branch = "master"
@@ -107,40 +91,13 @@
     "nfs",
     "xfs"
   ]
-  revision = "40f013a808ec4fa79def444a1a56de4d1727efcb"
+  revision = "05ee40e3a273f7245e8777337fc7b46e533a9a92"
 
 [[projects]]
   name = "github.com/sirupsen/logrus"
   packages = ["."]
-  revision = "c155da19408a8799da419ed3eeb0cb5db0ad5dbc"
-  version = "v1.0.5"
-
-[[projects]]
-  name = "github.com/uber/jaeger-client-go"
-  packages = [
-    ".",
-    "internal/baggage",
-    "internal/spanlog",
-    "internal/throttler",
-    "log",
-    "thrift",
-    "thrift-gen/agent",
-    "thrift-gen/jaeger",
-    "thrift-gen/sampling",
-    "thrift-gen/zipkincore",
-    "utils"
-  ]
-  revision = "b043381d944715b469fd6b37addfd30145ca1758"
-  version = "v2.14.0"
-
-[[projects]]
-  name = "github.com/uber/jaeger-lib"
-  packages = [
-    "metrics",
-    "metrics/prometheus"
-  ]
-  revision = "ed3a127ec5fef7ae9ea95b01b542c47fbd999ce5"
-  version = "v1.5.0"
+  revision = "3e01752db0189b9157070a0e1668a620f9a85da2"
+  version = "v1.0.6"
 
 [[projects]]
   name = "github.com/ugorji/go"
@@ -152,13 +109,7 @@
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
-  revision = "a49355c7e3f8fe157a85be2f77e6e269a0f89602"
-
-[[projects]]
-  branch = "master"
-  name = "golang.org/x/net"
-  packages = ["context"]
-  revision = "4cb1c02c05b0e749b0365f61ae859a8e0cfceed9"
+  revision = "de0752318171da717af4ce24d0a2e8626afaeb11"
 
 [[projects]]
   branch = "master"
@@ -167,7 +118,7 @@
     "unix",
     "windows"
   ]
-  revision = "7138fd3d9dc8335c567ca206f4333fb75eb05d56"
+  revision = "904bdc257025c7b3f43c19360ad3ab85783fad78"
 
 [[projects]]
   name = "gopkg.in/go-playground/validator.v8"
@@ -184,6 +135,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "a7b4a241ddc33b8e1cacb47deba250cc63cb2fc37e02a9f54f754bb1d242d330"
+  inputs-digest = "cfb76a107033de6a324f07b2b42321da57969a25f09c4202008c49f9e85f489a"
   solver-name = "gps-cdcl"
   solver-version = 1
