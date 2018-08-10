@@ -3,18 +3,27 @@
 [![IBM Cloud powered][img-ibmcloud-powered]][url-cloud]
 [![Travis][img-travis-master]][url-travis-master]
 [![Coveralls][img-coveralls-master]][url-coveralls-master]
+[![Version][img-version]][url-npm]
+[![DownloadsMonthly][img-npm-downloads-monthly]][url-npm]
+[![DownloadsTotal][img-npm-downloads-total]][url-npm]
+[![License][img-license]][url-npm]
 
 [img-ibmcloud-powered]: https://img.shields.io/badge/IBM%20Cloud-powered-blue.svg
 [url-cloud]: http://bluemix.net
+[url-npm]: https://www.npmjs.com/package/generator-ibm-core-golang-gin
+[img-license]: https://img.shields.io/npm/l/generator-ibm-core-golang-gin.svg
+[img-version]: https://img.shields.io/npm/v/generator-ibm-core-golang-gin.svg
+[img-npm-downloads-monthly]: https://img.shields.io/npm/dm/generator-ibm-core-golang-gin.svg
+[img-npm-downloads-total]: https://img.shields.io/npm/dt/generator-ibm-core-golang-gin.svg
 
-[img-travis-master]: https://travis-ci.org/ibm-developer/generator-ibm-core-golang-gin
-[url-travis-master]: https://travis-ci.org/ibm-developer/generator-ibm-core-golang-gin
+[img-travis-master]: https://travis-ci.org/ibm-developer/generator-ibm-core-golang-gin.svg?branch=master
+[url-travis-master]: https://travis-ci.org/ibm-developer/generator-ibm-core-golang-gin/branches
 
 [img-coveralls-master]: https://coveralls.io/repos/github/ibm-developer/generator-ibm-core-golang-gin/badge.svg
 [url-coveralls-master]: https://coveralls.io/github/ibm-developer/generator-ibm-core-golang-gin
 
-[img-coveralls-master]: https://coveralls.io/repos/github/ibm-developer/generator-ibm-core-golang-gin/badge.svg
-[url-coveralls-master]: https://coveralls.io/github/ibm-developer/generator-ibm-core-golang-gin
+
+## Overview
 
 This generator produces a simple Gin-based Golang server application, with all the ingredients you need for a good start at building a cloud native application. It can be run locally or remotely (e.g. IBM Cloud). 
 
