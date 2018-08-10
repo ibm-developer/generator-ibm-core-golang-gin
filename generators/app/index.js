@@ -184,7 +184,7 @@ module.exports = class extends Generator {
         this.env.error("GOPATH environment variable not defined. For help setting the GOPATH visit this link: https://github.com/golang/go/wiki/SettingGOPATH");
       } else {
         // Place the app in GOPATH/src/<appname>
-        this.destinationRoot(path.join(process.env.GOPATH, 'src/', this.options.bluemix.sanitizedName));
+        this.destinationRoot(path.join(process.env.GOPATH, 'src/', this.options.sanitizedName));
       }
     } 
   }

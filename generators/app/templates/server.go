@@ -78,7 +78,7 @@ func RequestTracker(counter *prometheus.CounterVec) gin.HandlerFunc {
 
 
 func main() {
-	
+
 <% if (addServices) { -%>
 	services.Init()
 <% } -%> 
@@ -148,17 +148,17 @@ func main() {
 <% if (applicationType === "BLANK") { -%>
 <%   if (typeof resources !== 'undefined') { -%>
 	router.Use(static.Serve("/", static.LocalFile("./public", false)))
-<%     Object.keys(resources).forEach(function (resource) {               -%>
-<%     let routes = resources[resource]-%>
-<%       Object.keys(routes).forEach(function (i) {                -%>
-<%         let route = routes[i] -%>
-<%         let path = route.route.capitalize();           -%>
+<%     Object.keys(resources).forEach(function (i) {               -%>
+<%     let resourceNames = resources[i]-%>
+<%       Object.keys(resourceNames).forEach(function (j) {                -%>
+<%         let resourceName = resourceNames[j] -%>
+<%         let path = resourceName.route.capitalize();           -%>
 <%         if (typeof basepath !== 'undefined') {         -%>
-<%           path = basepath.capitalize() + route.route;  -%>
+<%           path = basepath.capitalize() + resourceName.route;  -%>
 <%         }                                              -%>
 <%         let funcName = path.replace(/\/:?([a-zA-Z])/g, function (g) { return g[g.length-1].toUpperCase(); }); -%>
-<%         funcName = funcName + route.method.toUpperCase();   -%>
-	router.<%- route.method.toUpperCase(); %>("<%- path %>", routers.<%- funcName -%>)
+<%         funcName = funcName + resourceName.method.toUpperCase();   -%>
+	router.<%- resourceName.method.toUpperCase(); %>("<%- path %>", routers.<%- funcName -%>)
 <%       }.bind(this));                                                  -%>
 
 <%     }.bind(this)); -%>
