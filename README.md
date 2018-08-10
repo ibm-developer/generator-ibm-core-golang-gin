@@ -46,7 +46,7 @@ npm install -g generator-ibm-core-golang-gin
 ## Usage
 
 ```bash
-yo core-golang-gin
+yo ibm-core-golang-gin
 ```
 This will create an application in your `$GOPATH/src/<application-name>` directory.
 
