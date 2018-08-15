@@ -12,10 +12,10 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/afex/hystrix-go/hystrix"
 	"github.com/afex/hystrix-go/hystrix/metric_collector"
-	"github.com/opentracing/opentracing-go"
-	"github.com/opentracing/opentracing-go/ext"
-	"github.com/uber/jaeger-client-go"
-	jaegerprom "github.com/uber/jaeger-lib/metrics/prometheus"
+	// "github.com/opentracing/opentracing-go"
+	// "github.com/opentracing/opentracing-go/ext"
+	// "github.com/uber/jaeger-client-go"
+	// jaegerprom "github.com/uber/jaeger-lib/metrics/prometheus"
 	log "github.com/sirupsen/logrus"
 	"os"
 	"net/http"
@@ -53,35 +53,34 @@ func RequestTracker(counter *prometheus.CounterVec) gin.HandlerFunc {
 	}
 }
 
-func OpenTracing() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		wireCtx, _ := opentracing.GlobalTracer().Extract(
-			opentracing.HTTPHeaders,
-			opentracing.HTTPHeadersCarrier(c.Request.Header))
+// func OpenTracing() gin.HandlerFunc {
+// 	return func(c *gin.Context) {
+// 		wireCtx, _ := opentracing.GlobalTracer().Extract(
+// 			opentracing.HTTPHeaders,
+// 			opentracing.HTTPHeadersCarrier(c.Request.Header))
+// 		serverSpan := opentracing.StartSpan(c.Request.URL.Path,
+// 			ext.RPCServerOption(wireCtx))
+// 		defer serverSpan.Finish()
+// 		c.Request = c.Request.WithContext(opentracing.ContextWithSpan(c.Request.Context(), serverSpan))
+// 		c.Next()
+// 	}
+// }
 
-		serverSpan := opentracing.StartSpan(c.Request.URL.Path,
-			ext.RPCServerOption(wireCtx))
-		defer serverSpan.Finish()
-		c.Request = c.Request.WithContext(opentracing.ContextWithSpan(c.Request.Context(), serverSpan))
-		c.Next()
-	}
-}
+// type LogrusAdapter struct{}
 
-type LogrusAdapter struct{}
+// func (l LogrusAdapter) Error(msg string) {
+// 	log.Errorf(msg)
+// }
 
-func (l LogrusAdapter) Error(msg string) {
-	log.Errorf(msg)
-}
-
-func (l LogrusAdapter) Infof(msg string, args ...interface{}) {
-	log.Infof(msg, args)
-}
+// func (l LogrusAdapter) Infof(msg string, args ...interface{}) {
+// 	log.Infof(msg, args)
+// }
 
 
 func main() {
+
 <% if (addServices) { -%>
 	services.Init()
-
 <% } -%> 
 	log.SetFormatter(&log.JSONFormatter{})
 	log.SetOutput(os.Stdout)
@@ -108,41 +107,40 @@ func main() {
 	metricCollector.Registry.Register(collector.NewPrometheusCollector)
 
 	//And jaeger metrics and reporting to prometheus route
-	logAdapt := LogrusAdapter{}
-	jaeger.NewLoggingReporter(logAdapt)
-	factory := jaegerprom.New()
-	metrics := jaeger.NewMetrics(factory, map[string]string{"lib": "jaeger"})
+	// logAdapt := LogrusAdapter{}
+	// factory := jaegerprom.New()
+	// metrics := jaeger.NewMetrics(factory, map[string]string{"lib": "jaeger"})
 
-	transport, err := jaeger.NewUDPTransport("localhost:5775", 0)
-	if err != nil {
-		log.Errorln(err.Error())
-	}
+	// Add tracing to application
+	// transport, err := jaeger.NewUDPTransport("localhost:5775", 0)
+	// if err != nil {
+	// 	log.Errorln(err.Error())
+	// }
 
-	reporter := jaeger.NewCompositeReporter(
-		jaeger.NewLoggingReporter(logAdapt),
-		jaeger.NewRemoteReporter(transport,
-			jaeger.ReporterOptions.Metrics(metrics),
-			jaeger.ReporterOptions.Logger(logAdapt),
-		),
-	)
-	defer reporter.Close()
+	// reporter := jaeger.NewCompositeReporter(
+	// 	jaeger.NewLoggingReporter(logAdapt),
+	// 	jaeger.NewRemoteReporter(transport,
+	// 		jaeger.ReporterOptions.Metrics(metrics),
+	// 		jaeger.ReporterOptions.Logger(logAdapt),
+	// 	),
+	// )
+	// defer reporter.Close()
 
-	sampler := jaeger.NewConstSampler(true)
-	tracer, closer := jaeger.NewTracer("<%- sanitizedName
-	 %>",
-		sampler,
-		reporter,
-		jaeger.TracerOptions.Metrics(metrics),
-	)
-	defer closer.Close()
+	// sampler := jaeger.NewConstSampler(true)
+	// tracer, closer := jaeger.NewTracer("<%- sanitizedName %>",
+	// 	sampler,
+	// 	reporter,
+	// 	jaeger.TracerOptions.Metrics(metrics),
+	// )
+	// defer closer.Close()
 
-	opentracing.SetGlobalTracer(tracer)
+	// opentracing.SetGlobalTracer(tracer)
 
 	router := gin.Default()
 	router.RedirectTrailingSlash = false
 
 	router.Use(RequestTracker(counter))
-	router.Use(OpenTracing())
+	// router.Use(OpenTracing())
 	router.Use(HystrixHandler("timeout"))
 
 	router.GET("/metrics", gin.WrapH(promhttp.Handler()))
@@ -150,17 +148,17 @@ func main() {
 <% if (applicationType === "BLANK") { -%>
 <%   if (typeof resources !== 'undefined') { -%>
 	router.Use(static.Serve("/", static.LocalFile("./public", false)))
-<%     Object.keys(resources).forEach(function (resource) {               -%>
-<%     let routes = resources[resource]-%>
-<%       Object.keys(routes).forEach(function (i) {                -%>
-<%         let route = routes[i] -%>
-<%         let path = route.route.capitalize();           -%>
+<%     Object.keys(resources).forEach(function (i) {               -%>
+<%     let resourceNames = resources[i]-%>
+<%       Object.keys(resourceNames).forEach(function (j) {                -%>
+<%         let resourceName = resourceNames[j] -%>
+<%         let path = resourceName.route.capitalize();           -%>
 <%         if (typeof basepath !== 'undefined') {         -%>
-<%           path = basepath.capitalize() + route.route;  -%>
+<%           path = basepath.capitalize() + resourceName.route;  -%>
 <%         }                                              -%>
 <%         let funcName = path.replace(/\/:?([a-zA-Z])/g, function (g) { return g[g.length-1].toUpperCase(); }); -%>
-<%         funcName = funcName + route.method.toUpperCase();   -%>
-	router.<%- route.method.toUpperCase(); %>("<%- path %>", routers.<%- funcName -%>)
+<%         funcName = funcName + resourceName.method.toUpperCase();   -%>
+	router.<%- resourceName.method.toUpperCase(); %>("<%- path %>", routers.<%- funcName -%>)
 <%       }.bind(this));                                                  -%>
 
 <%     }.bind(this)); -%>

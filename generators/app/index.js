@@ -178,10 +178,15 @@ module.exports = class extends Generator {
   }
 
   paths() {
-    // Place the app in GOPATH/src/<appname>
     if (this.interactiveMode) {
-      this.destinationRoot(path.join(process.env.GOPATH, 'src/', this.options.sanitizedName));
-    }
+      // Error out if the user does not have a GOPATH set up
+      if (typeof process.env.GOPATH === 'undefined') {
+        this.env.error("GOPATH environment variable not defined. For help setting the GOPATH visit this link: https://github.com/golang/go/wiki/SettingGOPATH");
+      } else {
+        // Place the app in GOPATH/src/<appname>
+        this.destinationRoot(path.join(process.env.GOPATH, 'src/', this.options.sanitizedName));
+      }
+    } 
   }
 
   writing() {

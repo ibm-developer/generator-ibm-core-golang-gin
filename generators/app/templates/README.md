@@ -13,6 +13,9 @@ go get -u github.com/golang/dep/cmd/dep
 
 ## Run application locally
 
+In order for Go applications to run locally, they must be placed in the correct file path. The application must exist in `$GOPATH/src/<%= sanitizedName %>`
+
+
 ```bash
 dep ensure
 go run server.go
