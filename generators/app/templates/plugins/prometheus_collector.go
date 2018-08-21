@@ -1,15 +1,15 @@
 package plugins
 
 import (
-	"log"
-	"strings"
 	"github.com/afex/hystrix-go/hystrix/metric_collector"
 	"github.com/prometheus/client_golang/prometheus"
+	"log"
+	"strings"
 )
 
 type PrometheusCollector struct {
-  circuitOpenPrefix       string
-  attemptsPrefix          string
+	circuitOpenPrefix       string
+	attemptsPrefix          string
 	errorsPrefix            string
 	successesPrefix         string
 	failuresPrefix          string
