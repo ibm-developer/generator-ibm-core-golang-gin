@@ -197,7 +197,7 @@ module.exports = class extends Generator {
     };
     /* eslint-enable */
 
-    this.fs.copy(this.templatePath('.gitignore'), this.destinationPath('.gitignore'));
+    this.fs.copy(this.templatePath('_gitignore'), this.destinationPath('.gitignore'));
     if (!this.fs.exists(this.destinationPath('README.md'))) {
       this.fs.copyTpl(
         this.templatePath('README.md'),
