@@ -3,15 +3,20 @@ node_js:
 - '8'
 before_install:
 - npm i -g makeshift && makeshift -r https://registry.npmjs.org
-- npm i -g markdown-to-html
-- wget https://github.com/github/hub/releases/download/v2.2.9/hub-linux-386-2.2.9.tgz
-- tar -xvzf hub-linux-386-2.2.9.tgz
-- export PATH=${PATH}:$PWD/hub-linux-386-2.2.9/bin/:$PWD/linux-amd64
+- npm i -g standard-version
+before_script:
+- cd /tmp
+- wget https://github.com/github/hub/releases/download/v2.5.1/hub-linux-386-2.5.1.tgz
+- tar -xvzf hub-linux-386-2.5.1.tgz
+- mv hub-linux-386-2.5.1 hub
 - export GOPATH="/tmp/go"
-- export PATH="/tmp/go/bin:${PATH}"
-script: npm test && npm run coveralls && ./npm_version_upgrade.sh
+- export PATH=${PATH}:/tmp/hub/bin:${GOPATH}/bin
+- git clone -b master https://github.com/ibm-developer/standard-npm-devops.git
+- cd -
+script: npm test && npm run coveralls && /tmp/standard-npm-devops/do_devops.sh
 branches:
   only:
-  - develop
   - master
-  
+  - develop
+env:
+  - DEV_BRANCH=develop PROD_BRANCH=master DEVOPS_SCRIPT_DIR="/tmp/standard-npm-devops"
