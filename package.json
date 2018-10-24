@@ -1,6 +1,6 @@
 {
   "name": "generator-ibm-core-golang-gin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generates a server using the gin framework",
   "license": "Apache-2.0",
   "homepage": "https://github.com/ibm-developer/generator-ibm-core-golang-gin",
