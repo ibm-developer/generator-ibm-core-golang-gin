@@ -10,5 +10,5 @@ func SwaggerExplorerRedirect(c *gin.Context) {
 }
 
 func SwaggerAPI(c *gin.Context) {
-	c.File("./public/swagger.<%- openApiFileType %>")
+	c.File("./public/swagger.{{openApiFileType}}")
 }
