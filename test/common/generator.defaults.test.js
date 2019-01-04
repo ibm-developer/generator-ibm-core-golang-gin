@@ -49,6 +49,9 @@ describe('Go Generator integration test for default when application type not sp
     it('contains default blank message', () => {
       assert.fileContent(common.commonFile.server_go, 'c.String(http.StatusOK, "You are now running a blank Go application")')
     });
+    it('contains health endpoint', () => {
+      assert.fileContent(common.commonFile.server_go, 'router.GET("/health", routers.HealthGET)')
+    });
   });
 
   describe(common.commonFile.README_md, () => {
