@@ -25,6 +25,7 @@ const helpers = require('../../lib/helpers.js');
 const swaggerize = require('ibm-openapi-support');
 const OPTION_BLUEMIX = 'bluemix';
 const OPTION_SPEC = 'spec';
+const Handlebars = require('../../lib/handlebars.js');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -196,15 +197,14 @@ module.exports = class extends Generator {
       return this.charAt(0).toUpperCase() + this.slice(1);
     };
     /* eslint-enable */
-
     this.fs.copy(this.templatePath('_gitignore'), this.destinationPath('.gitignore'));
     if (!this.fs.exists(this.destinationPath('README.md'))) {
-      this.fs.copyTpl(
-        this.templatePath('README.md'),
-        this.destinationPath('README.md'),
-        this.options
-      );
+      this._writeHandlebarsFile('README.md', 'README.md', {
+        name: this.options.name || this.options.spec && this.options.spec.appname,
+        sanitizedName: this.options.sanitizedName
+      });
     }
+
     this.fs.copy(this.templatePath('Gopkg.lock'), this.destinationPath('Gopkg.lock'));
     this.fs.copy(this.templatePath('Gopkg.toml'), this.destinationPath('Gopkg.toml'));
     this.fs.copy(this.templatePath('run-dev'), this.destinationPath('run-dev'));
@@ -219,11 +219,15 @@ module.exports = class extends Generator {
       this.options.resources = this.options.parsedSwagger.resources;
       this.options.basepath = this.options.parsedSwagger.basepath
     }
-    this.fs.copyTpl(
-      this.templatePath('server.go'),
-      this.destinationPath('server.go'),
-      this.options
-    );
+    let resourcesList = this._serverGoInfo(this.options.resources);
+    this._writeHandlebarsFile('server.go', 'server.go', {
+      resourceType: typeof this.options.resources,
+      resources: resourcesList,
+      parsedSwaggerInfo: this.options.resources,
+      name: this.options.bluemix.name || this.options.spec && this.options.spec.appname,
+      applicationType: this.options.applicationType,
+      sanitizedName: this.options.sanitizedName
+    });
     this.fs.copy(
       this.templatePath('health.go'),
       this.destinationPath('routers/health.go')
@@ -244,11 +248,9 @@ module.exports = class extends Generator {
         this.destinationPath('public/swagger.yaml'),
         this.options
       );
-      this.fs.copyTpl(
-        this.templatePath('swagger.go'),
-        this.destinationPath('routers/swagger.go'),
-        this.options
-      );
+      this._writeHandlebarsFile('swagger.go', 'routers/swagger.go', {
+        openApiFileType: this.options.openApiFileType
+      });
     } else if (this.options.applicationType === 'BLANK') {
       // If blank project and user provides swagger
       if (this.options.parsedSwagger) {
@@ -322,6 +324,28 @@ module.exports = class extends Generator {
       });
   }
 
+  _serverGoInfo(resources){
+    let routers = [];
+    if (typeof resources !== 'undefined') {
+      Object.keys(resources).forEach(function (i) {
+        let resourceNames = resources[i];
+        Object.keys(resourceNames).forEach(function (j) {
+          let resourceName = resourceNames[j];
+          let path = resourceName.route.capitalize();
+          if (typeof basepath !== 'undefined') {
+            path = this.options.parsedSwagger.basepath.capitalize() + resourceName.route;
+          }
+          let funcName = path.replace(/\/:?([a-zA-Z])/g, function (g) {
+            return g[g.length - 1].toUpperCase();
+          });
+          funcName = funcName + resourceName.method.toUpperCase();
+          routers.push(`router.${resourceName.method.toUpperCase()}("${path}", routers.${funcName})`);
+        }.bind(this));
+
+      }.bind(this));
+    }
+    return routers;
+  }
   // Return true if 'sanitized', false if missing, exception if bad data
   _sanitizeOption(options, name) {
     let optionValue = options[name];
@@ -350,5 +374,12 @@ module.exports = class extends Generator {
         name + ' parameter is expected to be a valid stringified JSON object'
       );
     }
+  }
+
+  _writeHandlebarsFile(templateFile, destinationFile, data) {
+    let template = this.fs.read(this.templatePath(templateFile));
+    let compiledTemplate = Handlebars.compile(template);
+    let output = compiledTemplate(data);
+    this.fs.write(this.destinationPath(destinationFile), output);
   }
 };

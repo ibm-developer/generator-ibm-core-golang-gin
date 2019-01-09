@@ -1,11 +1,11 @@
 package main
 
 import (
-	"<%- sanitizedName %>/routers"
-	"<%- sanitizedName %>/plugins"
-<% if (addServices) { -%>
-	"<%- sanitizedName %>/services"
-<% } -%>  
+	"{{sanitizedName}}/routers"
+	"{{sanitizedName}}/plugins"
+    {{#if addServices}}
+	"{{sanitizedName}}/services"
+    {{/if}}
 	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/static"
 	"github.com/prometheus/client_golang/prometheus"
@@ -35,11 +35,11 @@ func HystrixHandler(command string) gin.HandlerFunc {
 			c.Next()
 			return nil
 		}, func(err error) error {
-<% if (applicationType === "WEBAPP") { -%>
+{{#ifCond applicationType '===' 'WEBAPP'}}
 			c.HTML(http.StatusInternalServerError, "500.html", nil)
-<% } else { -%>
+{{else}}
 			c.String(http.StatusInternalServerError, "500 Internal Server Error")
-<% } -%>
+{{/ifCond}}
 			return err
 		})
 	}
@@ -79,9 +79,9 @@ func RequestTracker(counter *prometheus.CounterVec) gin.HandlerFunc {
 
 func main() {
 
-<% if (addServices) { -%>
+{{#if addServices}}
 	services.Init()
-<% } -%> 
+{{/if}}
 	log.SetFormatter(&log.JSONFormatter{})
 	log.SetOutput(os.Stdout)
 
@@ -102,7 +102,7 @@ func main() {
 	})
 	//Add Hystrix to prometheus metrics
 	collector := plugins.InitializePrometheusCollector(plugins.PrometheusCollectorConfig{
-		Namespace: "<%- sanitizedName %>",
+		Namespace: "{{sanitizedName}}",
 	})
 	metricCollector.Registry.Register(collector.NewPrometheusCollector)
 
@@ -127,7 +127,7 @@ func main() {
 	// defer reporter.Close()
 
 	// sampler := jaeger.NewConstSampler(true)
-	// tracer, closer := jaeger.NewTracer("<%- sanitizedName %>",
+	// tracer, closer := jaeger.NewTracer("{{sanitizedName}}",
 	// 	sampler,
 	// 	reporter,
 	// 	jaeger.TracerOptions.Metrics(metrics),
@@ -144,50 +144,44 @@ func main() {
 	router.Use(HystrixHandler("timeout"))
 
 	router.GET("/metrics", gin.WrapH(promhttp.Handler()))
-
-<% if (applicationType === "BLANK") { -%>
-<%   if (typeof resources !== 'undefined') { -%>
+{{#ifCond applicationType '===' 'BLANK'}}
+	{{#ifCond resourceType '!==' 'undefined'}}
 	router.Use(static.Serve("/", static.LocalFile("./public", false)))
-<%     Object.keys(resources).forEach(function (i) {               -%>
-<%     let resourceNames = resources[i]-%>
-<%       Object.keys(resourceNames).forEach(function (j) {                -%>
-<%         let resourceName = resourceNames[j] -%>
-<%         let path = resourceName.route.capitalize();           -%>
-<%         if (typeof basepath !== 'undefined') {         -%>
-<%           path = basepath.capitalize() + resourceName.route;  -%>
-<%         }                                              -%>
-<%         let funcName = path.replace(/\/:?([a-zA-Z])/g, function (g) { return g[g.length-1].toUpperCase(); }); -%>
-<%         funcName = funcName + resourceName.method.toUpperCase();   -%>
-	router.<%- resourceName.method.toUpperCase(); %>("<%- path %>", routers.<%- funcName -%>)
-<%       }.bind(this));                                                  -%>
+    {{#each resources}}
+    {[this}}
+    {{/each}}
 
-<%     }.bind(this)); -%>
 	router.GET("/explorer", routers.SwaggerExplorerRedirect)
 	router.GET("/swagger/api", routers.SwaggerAPI)
 	router.Use(static.Serve("/explorer/", static.LocalFile("./public/swagger-ui/", true)))
-<%   } else { -%>
+	{{/ifCond}}
+	{{#ifCond resourceType '===' 'undefined'}}
 	router.Use(static.Serve("/", static.LocalFile("./public", false)))
 	router.GET("/", func(c *gin.Context) {
 		c.String(http.StatusOK, "You are now running a blank Go application")
 	})
-<%   } -%>
-<% } else if (applicationType === "MS") { -%>
+    {{/ifCond}}
+{{/ifCond}}
+{{#ifCond applicationType '===' 'MS'}}
 	router.GET("/explorer", routers.SwaggerExplorerRedirect)
 	router.GET("/swagger/api", routers.SwaggerAPI)
 	router.Use(static.Serve("/explorer/", static.LocalFile("./public/swagger-ui/", true)))
-<% } else if (applicationType === "WEBAPP") { -%>
+{{/ifCond}}
+{{#ifCond applicationType '===' 'WEBAPP'}}
 	router.LoadHTMLGlob("public/*.html")
 	router.Use(static.Serve("/", static.LocalFile("./public", false)))
 	router.GET("/", routers.Index)
 	router.NoRoute(routers.NotFoundError)
 	router.GET("/500", routers.InternalServerError)
-<% } -%>
-<% if (typeof resources === 'undefined' || typeof (resources.health) === 'undefined') { -%>
-
+{{/ifCond}}
+{{#ifCond resourceType '===' 'undefined'}}
 	router.GET("/health", routers.HealthGET)
-<% } -%>
-	
-	log.Info("Starting <%- name %> on port " + port())
+{{/ifCond}}
+{{#ifCond parsedSwaggerInfo.health '===' 'undefined'}}
+	router.GET("/health", routers.HealthGET)
+{{/ifCond}}
+
+	log.Info("Starting {{name}} on port " + port())
 
 	router.Run(port())
 }
