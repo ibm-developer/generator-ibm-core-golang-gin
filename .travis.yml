@@ -13,7 +13,7 @@ before_script:
 - export PATH=${PATH}:/tmp/hub/bin:${GOPATH}/bin
 - git clone -b master https://github.com/ibm-developer/standard-npm-devops.git
 - cd -
-script: npm test && npm run coveralls && /tmp/standard-npm-devops/do_devops.sh
+script: npm test && /tmp/standard-npm-devops/do_devops.sh
 branches:
   only:
   - master
