@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.3"></a>
+## [1.0.3](https://github.com/ibm-developer/generator-ibm-core-golang-gin/compare/v1.0.2...v1.0.3) (2019-02-20)
+
+
+### Bug Fixes
+
+* add handlebars ([8780946](https://github.com/ibm-developer/generator-ibm-core-golang-gin/commit/8780946))
+* pass addServices to template ([a1e358e](https://github.com/ibm-developer/generator-ibm-core-golang-gin/commit/a1e358e))
+
+
+
 <a name="1.0.2"></a>
 ## [1.0.2](https://github.com/ibm-developer/generator-ibm-core-golang-gin/compare/v1.0.1...v1.0.2) (2019-01-09)
 
