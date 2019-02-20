@@ -187,7 +187,7 @@ module.exports = class extends Generator {
         // Place the app in GOPATH/src/<appname>
         this.destinationRoot(path.join(process.env.GOPATH, 'src/', this.options.sanitizedName));
       }
-    } 
+    }
   }
 
   writing() {
@@ -226,7 +226,8 @@ module.exports = class extends Generator {
       parsedSwaggerInfo: this.options.resources,
       name: this.options.bluemix.name || this.options.spec && this.options.spec.appname,
       applicationType: this.options.applicationType,
-      sanitizedName: this.options.sanitizedName
+      sanitizedName: this.options.sanitizedName,
+      addServices: this.options.addServices
     });
     this.fs.copy(
       this.templatePath('health.go'),
