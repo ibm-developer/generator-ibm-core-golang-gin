@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.4"></a>
+## [1.0.4](https://github.com/ibm-developer/generator-ibm-core-golang-gin/compare/v1.0.3...v1.0.4) (2019-09-03)
+
+
+### Bug Fixes
+
+* npm audit dependency update ([8ed568d](https://github.com/ibm-developer/generator-ibm-core-golang-gin/commit/8ed568d))
+
+
+
 <a name="1.0.3"></a>
 ## [1.0.3](https://github.com/ibm-developer/generator-ibm-core-golang-gin/compare/v1.0.2...v1.0.3) (2019-02-20)
 
