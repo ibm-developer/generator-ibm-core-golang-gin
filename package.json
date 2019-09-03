@@ -1,6 +1,6 @@
 {
   "name": "generator-ibm-core-golang-gin",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Generates a server using the gin framework",
   "license": "Apache-2.0",
   "homepage": "https://github.com/ibm-developer/generator-ibm-core-golang-gin",
@@ -20,15 +20,15 @@
     "mocha": "^5.2.0",
     "mocha-multi-reporters": "^1.1.7",
     "nsp": "^3.2.1",
-    "nyc": "^13.1.0",
+    "nyc": "^14.1.1",
     "standard-version": "^4.2.0",
     "xunit-file": "^1.0.0",
     "yeoman-assert": "^3.1.1",
     "yeoman-test": "^1.7.0"
   },
   "dependencies": {
-    "handlebars": "^4.1.0",
-    "ibm-openapi-support": "0.0.12",
+    "handlebars": "^4.1.2",
+    "ibm-openapi-support": "^0.0.13",
     "log4js": "^3.0.5",
     "npm": "^6.4.1",
     "yeoman-generator": "^2.0.1"
@@ -38,6 +38,7 @@
     "test": "npm run lint && npm run mocha",
     "lint": "eslint .",
     "mocha": "nyc --reporter=lcov mocha test/common/* --reporter mocha-multi-reporters --reporter-options configFile=config.json",
+    "testinsights": "npm run mocha",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "version": "standard-version"
   },
